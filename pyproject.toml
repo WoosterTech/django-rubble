@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "django-utils"
-version = "0.1.0"
+version = "0.2.0"
 description = "Extend django-model-utils and django-extensions."
 authors = ["Karl Wooster <karl@woostertech.com>"]
 license = "MIT"
