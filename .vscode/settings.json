@@ -8,4 +8,9 @@
             "source.organizeImports": "explicit",
         },
     },
+    "python.testing.pytestArgs": [
+        "django_rubble"
+    ],
+    "python.testing.unittestEnabled": false,
+    "python.testing.pytestEnabled": true,
 }

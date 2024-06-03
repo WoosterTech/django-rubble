@@ -17,38 +17,58 @@ def is_number(s: Any):
 
 
 def ratio_to_whole(ratio: Decimal | float | str) -> Decimal:
+    """Convert a ratio to a whole number.
+
+    This is useful for converting a ratio to a percentage.
+
+    For example, 0.03 would be converted to 3 (3%).
+
+    Args:
+        ratio (Decimal, float, str): The ratio to be converted.
+
+    Returns:
+        The whole number. Decimal
+    """
     return Decimal(str(ratio)) * Decimal("100")
 
 
 def whole_to_ratio(whole: Decimal | float | str) -> Decimal:
+    """Convert a whole number to a ratio.
+
+    This is useful for converting a percentage to a ratio.
+
+    For example, 3 would be converted to 0.03 (3%).
+
+    Args:
+        whole (Decimal, float, str): The whole number to be converted.
+
+    Returns:
+        The ratio. Decimal
+    """
     return Decimal(str(whole)) * Decimal("0.01")
 
 
 def trim_trailing_zeros(value: float | Decimal | str) -> Decimal:
-    """Remove trailing zeros from a decimal value."""
-    if isinstance(value, Decimal):
-        _, _, exponent = value.as_tuple()
-    else:
-        _, _, exponent = Decimal(str(value)).as_tuple()
+    """Remove trailing zeros from a decimal value.
 
-    if not isinstance(exponent, int):
-        msg = "Exponent must be an integer"
-        raise TypeError(msg)
+    This is useful for ensuring that a value can be safely compared with another value.
 
-    if exponent < 0:
-        new_str = str(value).rstrip("0")
-        return Decimal(new_str)
+    For example, 3.1400 would be displayed as 3.14.
 
-    return Decimal(value)
+    Args:
+        value (float, Decimal, str): The value to be trimmed.
+
+    Returns:
+        The trimmed value. Decimal
+    """
+    return Decimal(str(value)).normalize()
 
 
 def set_zero(value: float | Decimal | str) -> Decimal:
     """Set a value to a true Decimal zero if it is zero."""
     decimal_from_string = Decimal(str(value))
 
-    _, decimal_digits, _ = decimal_from_string.as_tuple()
-
-    if len(decimal_digits) == 1 and decimal_digits[0] == 0:
+    if decimal_from_string == Decimal(0):
         return Decimal()
 
     return decimal_from_string
