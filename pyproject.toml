@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "django-rubble"
-version = "0.2.1"
+version = "0.2.2"
 description = "Extend django-model-utils and django-extensions."
 authors = ["Karl Wooster <karl@woostertech.com>"]
 license = "MIT"

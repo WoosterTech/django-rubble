@@ -1,3 +1,9 @@
+## 0.2.2 (2024-06-02)
+
+### Refactor
+
+- **functions**: simplification of some number functions to better utilize Decimal methods
+
 ## 0.2.1 (2024-06-02)
 
 ### Fix
