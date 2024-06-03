@@ -1,7 +1,7 @@
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 
-from django_utils.forms.db_forms import (
+from django_rubble.forms.db_forms import (
     SimplePercentageField as SimplePercentageFormField,
 )
 

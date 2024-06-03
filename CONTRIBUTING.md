@@ -1,4 +1,4 @@
-# Contributing to django-utils
+# Contributing to django-rubble
 
 > *THIS IS CURRENTLY JUST A STARTER FILE, PLEASE USE COMMON SENSE OR FIX IT!*
 
@@ -33,12 +33,6 @@ When you're ready to submit your changes, follow these steps:
 2. Push your changes to your forked repository.
 3. Open a pull request from your forked repository to the main repository.
 4. Provide a clear and concise description of your changes in the pull request.
-
-## License
-This project is licensed under the [License Name]. By contributing to this
-project, you agree to abide by the terms of this license.
-
-If you have any questions or need further assistance, please reach out to [Maintainer Name] at [Maintainer Email].
 
 ## Submitting a Pull Request
 

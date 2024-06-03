@@ -2,7 +2,7 @@ from django import forms
 from django.core.exceptions import ValidationError
 from django.utils.translation import gettext_lazy as _
 
-from django_utils.utils.numbers import Percent, is_number
+from django_rubble.utils.numbers import Percent, is_number
 
 
 class SimplePercentageField(forms.DecimalField):

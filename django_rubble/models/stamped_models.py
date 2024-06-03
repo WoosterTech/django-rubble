@@ -1,6 +1,6 @@
 from model_utils.models import TimeStampedModel  # type: ignore[import-untyped]
 
-from django_utils.fields.auto_fields import AutoCreatedByField, AutoModifiedByField
+from django_rubble.fields.auto_fields import AutoCreatedByField, AutoModifiedByField
 
 
 class StampedModel(TimeStampedModel):

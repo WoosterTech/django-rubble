@@ -1,4 +1,4 @@
-# django-utils
+# django-rubble
 
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 
@@ -14,7 +14,7 @@ Extend [django-model-utils](https://github.com/jazzband/django-model-utils) and 
 
 ## Installation
 
-1. Clone the repository: `git clone https://github.com/WoosterTech/django-utils.git`
+1. Clone the repository: `git clone https://github.com/WoosterTech/django-rubble.git`
 2. Install the dependencies: `poetry install`
 
 ## Usage
