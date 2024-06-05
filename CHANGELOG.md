@@ -1,3 +1,10 @@
+## 0.2.3 (2024-06-05)
+
+### Fix
+
+- **pyproject**: fix django constraint *again*
+- **pyproject**: add metadata for pypi and "fix" django deps
+
 ## 0.2.2 (2024-06-02)
 
 ### Refactor
