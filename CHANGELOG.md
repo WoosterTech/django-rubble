@@ -1,3 +1,9 @@
+## 0.3.0 (2024-06-19)
+
+### Feat
+
+- **stamped_admin**: add StampedTabularInline
+
 ## 0.2.3 (2024-06-05)
 
 ### Fix
