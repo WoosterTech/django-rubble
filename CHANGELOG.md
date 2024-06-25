@@ -1,3 +1,9 @@
+## 0.4.2 (2024-06-25)
+
+### Fix
+
+- **db_forms**: use named argument for `Percent` to satisfy BaseModel
+
 ## 0.4.1 (2024-06-25)
 
 ## 0.4.0 (2024-06-25)
