@@ -1,0 +1,142 @@
+from django.contrib import admin
+from django.contrib.contenttypes.models import ContentType
+from django.db import models
+from django.utils.translation import gettext_lazy as _
+from loguru import logger
+from pydantic import BaseModel
+
+
+class SerialNumberConfig(BaseModel):
+    """Configuration for NumberModel numbering."""
+
+    name: str | None = None
+    initial_value: int = 1
+    step: int = 1
+    prefix: str
+    width: int
+
+
+class NaturalKeyModelManager(models.Manager):
+    def get_by_natural_key(self, *args, **kwargs):
+        return self.get(*args, **kwargs)
+
+
+class NaturalKeyModel(models.Model):
+    natural_key_fields: list[str]
+
+    objects = NaturalKeyModelManager()
+
+    class Meta:
+        abstract = True
+
+    def natural_key(self):
+        return (getattr(self, field_name) for field_name in self.natural_key_fields)
+
+
+class NamedSerialNumberManager(models.Manager):
+    def get_serial_number(
+        self,
+        parent_model,
+        serial_number_config: SerialNumberConfig | None = None,
+    ) -> tuple[str, bool]:
+        """Generate next serial number, creating NamedSerialModel if one doesn't exist."""  # noqa: E501
+        if serial_number_config is None:
+            serial_number_config = parent_model.number_config
+
+        model_type = ContentType.objects.get_for_model(parent_model)
+        serial_number_config.name = (
+            model_type.name
+            if serial_number_config.name is None
+            else serial_number_config.name
+        )
+
+        msg = f"SerialNumberConfig: {serial_number_config}"
+        logger.debug(msg)
+
+        named_serial, created = self.get_or_create(
+            content_type=model_type,
+            defaults={
+                "name": serial_number_config.name,
+                "next_counter": serial_number_config.initial_value,
+                "prefix": serial_number_config.prefix,
+                "width": serial_number_config.width,
+                "step": serial_number_config.step,
+            },
+        )
+        return named_serial.get_next_number(), created  # type: ignore[attr-defined]
+
+
+class NamedSerialNumber(models.Model):
+    name = models.CharField(_("name"), max_length=50, blank=True)
+    content_type = models.ForeignKey(ContentType, on_delete=models.CASCADE)
+    next_counter = models.IntegerField(_("next counter"), default=1)
+    step = models.IntegerField(_("step"), default=1)
+    prefix = models.CharField(_("prefix"), max_length=10)
+    width = models.IntegerField(_("number width"))
+
+    objects = NamedSerialNumberManager()
+
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(
+                fields=["name", "content_type"], name="unique_name_for_content_type"
+            )
+        ]
+
+    def __str__(self) -> str:
+        return f"{self.name} -> next: {self.next_number}"
+
+    @property
+    @admin.display
+    def next_number(self) -> str:
+        return f"{self.prefix}{str(self.next_counter).zfill(self.width)}"
+
+    def get_next_number(self) -> str:
+        """Get current formatted number and increment counter."""
+        next_number = self.next_number
+        self.next_counter += self.step
+        self.save()
+
+        return next_number
+
+
+class NumberedModelManager(models.Manager):
+    def get_by_natural_key(self, number: str):
+        return self.get(number=number)
+
+
+class NumberedModel(models.Model):
+    """Adds a `number` field that uses `DocumentNumber` to generate values.
+
+    Args:
+        number_config: A dictionary with the following key:value pairs:
+            "prefix": str,
+            "width": int,
+            "start_value": 1
+        number_prefix: A string prefix, case-sensitive
+        number_width: An int representing how wide the numeric part of the string
+        should be.
+        number_start_value: An int used to set initial value. Only used for
+        initial creation.
+
+
+    Example:
+        Assuming `number_prefix = "INV"` and `number_width = 4`, `INV0001`,
+        `INV0002`, etc.
+    """
+
+    number = models.CharField(_("number"), unique=True, max_length=10, editable=False)
+    number_config: SerialNumberConfig
+
+    class Meta:
+        abstract = True
+
+    def save(self, *args, **kwargs) -> None:
+        if self._state.adding:
+            self.number, _ = NamedSerialNumber.objects.get_serial_number(self)
+            msg = f"New number is: {self.number}"
+            logger.debug(msg)
+        return super().save(*args, **kwargs)
+
+    def natural_key(self):
+        return (self.number,)

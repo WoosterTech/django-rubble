@@ -24,6 +24,7 @@ python = "^3.10"
 django = ">4,<5.1"
 django-model-utils = "^4.5.1"
 pydantic = "^2.6.4"
+loguru = "^0.7.2"
 
 [tool.poetry.group.dev]
 optional = true
@@ -152,6 +153,9 @@ line-ending = "auto"
 
 [tool.ruff.lint.isort]
 force-single-line = false
+
+[tool.mypy]
+plugins = ["mypy_django_plugin.main"]
 
 [tool.commitizen]
 name = "cz_conventional_commits"
