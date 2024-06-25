@@ -6,6 +6,8 @@
 
 Extend [django-model-utils](https://github.com/jazzband/django-model-utils) and [django-extensions](https://github.com/django-extensions/django-extensions).
 
+>Version 0.4.0 code got deleted but still exists on PyPI.
+
 ## Features
 
 - Serialized Number Generation (e.g. PN-0001, PN-0001; MY1, MY2)
