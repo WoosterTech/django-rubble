@@ -1,3 +1,9 @@
+## 0.4.0 (2024-06-25)
+
+### Feat
+
+- **number**: add numbers as a new model with admin
+
 ## 0.3.0 (2024-06-19)
 
 ### Feat
