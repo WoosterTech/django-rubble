@@ -52,6 +52,6 @@ class SimplePercentageField(forms.DecimalField):
 
                 return new_val.per_hundred
 
-            return Percent(val).per_hundred
+            return Percent(value=val).per_hundred
 
         return val
