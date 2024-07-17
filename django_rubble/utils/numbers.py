@@ -16,6 +16,19 @@ def is_number(s: Any):
         return True
 
 
+def any_to_float(s: Any, default: float = 0) -> float:
+    """Cast value as float, return default if invalid type."""
+    if not is_number(default):
+        msg = f"Default must be of type `float` [{default}]"
+        raise TypeError(msg)
+    try:
+        value_float = float(s)
+    except ValueError:
+        value_float = default
+
+    return value_float
+
+
 def ratio_to_whole(ratio: Decimal | float | str) -> Decimal:
     """Convert a ratio to a whole number.
 
