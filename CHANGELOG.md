@@ -1,3 +1,9 @@
+## 0.5.0b0 (2024-07-17)
+
+### Feat
+
+- **numbers**: add "any_to_float" function
+
 ## 0.4.2 (2024-06-25)
 
 ### Fix
