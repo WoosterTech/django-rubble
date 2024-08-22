@@ -1,3 +1,9 @@
+## 0.5.0b1 (2024-08-22)
+
+### Feat
+
+- **neapolitan**: add enums and other helpers to work with neapolitan-sundae
+
 ## 0.5.0b0 (2024-07-17)
 
 ### Feat
