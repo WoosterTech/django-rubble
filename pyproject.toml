@@ -25,6 +25,8 @@ django = ">4,<5.1"
 django-model-utils = "^4.5.1"
 pydantic = "^2.6.4"
 loguru = "^0.7.2"
+croniter = "^3.0.3"
+neapolitan = {version = "^24.6", optional = true}
 
 [tool.poetry.group.dev]
 optional = true
@@ -42,6 +44,9 @@ optional = true
 pytest = "^8.2.1"
 pytest-cov = "^5.0.0"
 pytest-sugar = "^1.0.0"
+
+[tool.poetry.extras]
+project = ["neapolitan"]
 
 [tool.ruff]
 # Exclude a variety of commonly ignored directories.

@@ -1,3 +1,7 @@
+from datetime import UTC, datetime
+
+from croniter import croniter
+from django.core.exceptions import ValidationError
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 
@@ -50,3 +54,29 @@ class SimplePercentageField(models.DecimalField):
         defaults.update(kwargs)
 
         return super().formfield(**defaults)
+
+
+CRON_REGEX = r"^(\*|([0-5]?[0-9])) (\*|([0-5]?[0-9])) (\*|([01]?[0-9]|2[0-3])) (\*|([01]?[0-9]|2[0-3])) (\*|([0-3]?[0-9])) (\*|([01]?[0-9]|2[0-3])) (\*|([0-5]?[0-9])) (\*|([01]?[0-9]|2[0-3]))$"  # noqa: E501
+
+
+def validate_cron_expression(value):
+    try:
+        _ = croniter(value, datetime.now(tz=UTC))
+    except (ValueError, KeyError):
+        msg = f"{value} is not a valid cron expression."
+        raise ValidationError(msg) from None
+
+
+class CronExpressionField(models.CharField):
+    default_validators = [validate_cron_expression]
+    description = "A field to store a cron expression"
+
+    def __init__(self, *args, **kwargs):
+        kwargs["max_length"] = kwargs.get(
+            "max_length", 100
+        )  # Set max_length to 100 if not provided
+        super().__init__(*args, **kwargs)
+
+    def formfield(self, **kwargs):
+        # Override formfield to use a specific widget or validation in forms, if needed.
+        return super().formfield(**kwargs)
