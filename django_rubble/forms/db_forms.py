@@ -16,7 +16,7 @@ class SimplePercentageField(forms.DecimalField):
         **kwargs,
     ):
         if "widget" not in kwargs:
-            step = 10 ** (-1 * decimal_places)
+            step = 10 ** (-1 * decimal_places) if decimal_places is not None else 1
             kwargs["widget"] = forms.NumberInput(
                 attrs={"class": "percent", "step": step}
             )

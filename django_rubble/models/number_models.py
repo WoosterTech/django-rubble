@@ -140,3 +140,11 @@ class NumberedModel(models.Model):
 
     def natural_key(self):
         return (self.number,)
+
+
+class TestNumberedModel(NumberedModel):
+    description = models.CharField("description", max_length=50)
+    number_config = SerialNumberConfig(prefix="TEST", width=4)
+
+    def __str__(self) -> str:
+        return f"{self.number}: {self.description}"

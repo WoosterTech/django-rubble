@@ -48,9 +48,9 @@ class SimplePercentageField(models.DecimalField):
 
     def formfield(self, **kwargs):
         defaults = {"form_class": SimplePercentageFormField}
-        kwargs.update(
-            decimal_places=self.decimal_places - 2,
-        )
+        if self.decimal_places is not None:
+            kwargs.update(decimal_places=self.decimal_places - 2)
+
         defaults.update(kwargs)
 
         return super().formfield(**defaults)
@@ -76,7 +76,3 @@ class CronExpressionField(models.CharField):
             "max_length", 100
         )  # Set max_length to 100 if not provided
         super().__init__(*args, **kwargs)
-
-    def formfield(self, **kwargs):
-        # Override formfield to use a specific widget or validation in forms, if needed.
-        return super().formfield(**kwargs)

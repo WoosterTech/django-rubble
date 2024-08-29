@@ -21,7 +21,7 @@ classifiers = [
 
 [tool.poetry.dependencies]
 python = "^3.10"
-django = ">4,<5.1"
+django = ">4,<5.3"
 django-model-utils = "^4.5.1"
 pydantic = "^2.6.4"
 loguru = "^0.7.2"
@@ -44,6 +44,8 @@ optional = true
 pytest = "^8.2.1"
 pytest-cov = "^5.0.0"
 pytest-sugar = "^1.0.0"
+pytest-django = "^4.8.0"
+factory-boy = "^3.3.1"
 
 [tool.poetry.extras]
 project = ["neapolitan"]
@@ -158,6 +160,9 @@ line-ending = "auto"
 
 [tool.ruff.lint.isort]
 force-single-line = false
+
+[tool.pytest.ini_options]
+DJANGO_SETTINGS_MODULE = "test.settings"
 
 [tool.mypy]
 plugins = ["mypy_django_plugin.main"]
