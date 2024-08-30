@@ -1,3 +1,5 @@
+"""Widgets for Django models."""
+
 from django.db.models.fields import Field
 from django.template.loader import render_to_string
 from pydantic import BaseModel

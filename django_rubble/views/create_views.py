@@ -1,3 +1,9 @@
+"""Views for creating and updating StampedModel instances.
+
+Deprecated:
+    This module is deprecated and will be removed in a future release.
+"""
+
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import CreateView, UpdateView
 

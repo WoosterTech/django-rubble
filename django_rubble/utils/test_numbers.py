@@ -1,8 +1,15 @@
 from decimal import Decimal
+from typing import TypeVar
 
 import pytest
 
-from django_rubble.utils.numbers import any_to_float, is_number, trim_trailing_zeros
+from django_rubble.utils.numbers import (
+    any_to_float,
+    is_number,
+    ratio_to_whole,
+    trim_trailing_zeros,
+    whole_to_ratio,
+)
 
 
 @pytest.mark.parametrize(
@@ -50,3 +57,30 @@ def test_any_to_float_exception():
     with pytest.raises(TypeError) as excinfo:
         any_to_float(4.2, "test")
     assert str(excinfo.value) == "Default must be of type `float` [test]"
+
+
+T = TypeVar("T", int, float, Decimal)
+
+
+@pytest.mark.parametrize(
+    ("input_value", "expected"),
+    [
+        (0.03, 3),
+        (Decimal("1"), Decimal("100")),
+        (1, 100),
+    ],
+)
+def test_ratio_to_whole(input_value: T, expected: T):
+    assert ratio_to_whole(input_value) == expected
+
+
+@pytest.mark.parametrize(
+    ("input_value", "expected"),
+    [
+        (3, 0.03),
+        (100, 1),
+        (Decimal("99"), Decimal("0.99")),
+    ],
+)
+def test_whole_to_ratio(input_value: T, expected: T):
+    assert whole_to_ratio(input_value) == expected

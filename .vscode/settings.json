@@ -7,6 +7,7 @@
         "editor.codeActionsOnSave": {
             "source.organizeImports": "explicit",
         },
+        "editor.rulers": [88],
     },
     "python.testing.pytestArgs": [
         "django_rubble"

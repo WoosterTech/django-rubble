@@ -1,13 +1,28 @@
+from itertools import chain
+
 from django.contrib import admin
 from django.contrib.contenttypes.models import ContentType
+from django.core.exceptions import FieldDoesNotExist
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 from loguru import logger
 from pydantic import BaseModel
 
+from django_rubble.checks.messages import must_be, refer_to_missing_field
+
 
 class SerialNumberConfig(BaseModel):
-    """Configuration for NumberModel numbering."""
+    """Configuration for NumberModel numbering.
+
+    Example:
+        `SerialNumberConfig(prefix="INV", width=4, initial_value=1, step=1)` ->
+        `INV0001`, `INV0002`, etc.
+
+    Attributes:
+        name: The name of the model, used for NamedSerialNumber.
+        initial_value: The starting value for the serial number.
+        step: The increment value for the serial number.
+        prefix: The prefix for the serial number."""
 
     name: str | None = None
     initial_value: int = 1
@@ -22,12 +37,56 @@ class NaturalKeyModelManager(models.Manager):
 
 
 class NaturalKeyModel(models.Model):
+    """Abstract model that adds a `natural_key` method to the model.
+
+    Attributes:
+        natural_key_fields: A list of field names that make up the natural key."""
+
     natural_key_fields: list[str]
 
     objects = NaturalKeyModelManager()
 
     class Meta:
         abstract = True
+
+    @classmethod
+    def check(cls, **kwargs):
+        errors = super().check(**kwargs)
+
+        errors.extend(cls._check_natural_key_fields(**kwargs))
+
+        return errors
+
+    @classmethod
+    def _check_natural_key_fields(cls, **kwargs):
+        """Check that the natural key fields are set."""
+        if not hasattr(cls, "natural_key_fields"):
+            return must_be(
+                "a list", option="natural_key_fields", obj=cls, error_id="rubble.M002"
+            )
+        if not isinstance(cls.natural_key_fields, list):
+            return must_be(
+                "a list", option="natural_key_fields", obj=cls, error_id="rubble.M002"
+            )
+
+        return list(
+            chain.from_iterable(
+                cls._check_natural_key_item(field) for field in cls.natural_key_fields
+            )
+        )
+
+    @classmethod
+    def _check_natural_key_item(cls, field_name: str):
+        try:
+            _ = cls._meta.get_field(field_name)
+        except FieldDoesNotExist:
+            return refer_to_missing_field(
+                field_name,
+                option="natural_key_fields",
+                obj=cls,
+                error_id="rubble.E001",
+            )
+        return []
 
     def natural_key(self):
         return (getattr(self, field_name) for field_name in self.natural_key_fields)
@@ -108,21 +167,10 @@ class NumberedModelManager(models.Manager):
 class NumberedModel(models.Model):
     """Adds a `number` field that uses `DocumentNumber` to generate values.
 
-    Args:
-        number_config: A dictionary with the following key:value pairs:
-            "prefix": str,
-            "width": int,
-            "start_value": 1
-        number_prefix: A string prefix, case-sensitive
-        number_width: An int representing how wide the numeric part of the string
-        should be.
-        number_start_value: An int used to set initial value. Only used for
-        initial creation.
+    Adds a `natural_key` method to the model, but no manager that uses it.
 
-
-    Example:
-        Assuming `number_prefix = "INV"` and `number_width = 4`, `INV0001`,
-        `INV0002`, etc.
+    Attributes:
+        number_config: A SerialNumberConfig instance.
     """
 
     number = models.CharField(_("number"), unique=True, max_length=10, editable=False)
