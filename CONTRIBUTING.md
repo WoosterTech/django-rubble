@@ -9,7 +9,6 @@ to this project.
 - [Contributing Guidelines](#contributing-guidelines)
 - [Code Style](#code-style)
 - [Submitting a Pull Request](#submitting-a-pull-request)
-- [License](#license)
 
 ## Getting Started
 To get started with contributing, follow these steps:
@@ -26,8 +25,7 @@ Please follow these guidelines when contributing to the project:
 
 ## Code Style
 We follow a specific code style in this project. Please ensure your code adheres
-to the style guidelines. You can find the style guide
-[here](link-to-style-guide).
+to the style guidelines. You can find the style guide **fix this**.
 When you're ready to submit your changes, follow these steps:
 1. Commit your changes with descriptive commit messages.
 2. Push your changes to your forked repository.

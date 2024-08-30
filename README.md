@@ -49,8 +49,7 @@ class PartNumber(NumberedModel):
 Numbers will be generated starting with "PN-0010" (note the padding to make a width of 4) and increment by the default step of "1."
 
 
-Contributions are welcome! Please follow the guidelines in
-[CONTRIBUTING.md](CONTRIBUTING.md).
+Contributions are welcome! Please follow the guidelines in [contributing](/contributing/)
 
 
 This project is licensed under the [MIT License](LICENSE).
@@ -67,4 +66,4 @@ MIT (see [License](LICENSE))
 
 ## Contributing
 
-See [CONTRIBUTING.md](CONTRIBUTING.md)
+See [contributing](/contributing/)
