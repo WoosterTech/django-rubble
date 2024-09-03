@@ -1,13 +1,23 @@
 from enum import StrEnum
 
-from pydantic import BaseModel, model_serializer, model_validator
+from pydantic import BaseModel, Field, model_serializer, model_validator
 
 
 class Icon(BaseModel):
-    name: str
-    snippet: str = ""
-    svg: str = ""
-    toolkit: str | None = None
+    """Icon model for use in the application.
+
+    Example:
+        `Icon(
+            name="pen-fill",
+            snippet="<i class='bi bi-pen-fill'></i>",
+            toolkit="bootstrap"
+        )`
+    """
+
+    name: str = Field(description="The name of the icon.")
+    snippet: str = Field(default="", description="The HTML snippet for the icon.")
+    svg: str = Field(default="", description="The SVG snippet for the icon.")
+    toolkit: str | None = Field(default=None, description="The toolkit for the icon.")
 
     def __str__(self) -> str:
         return self.name
@@ -61,6 +71,30 @@ class LibraryIcon(StrEnum):
     ```
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
     ```
+
+    Attributes:
+        PENCIL: Edit icon.
+        TRASH_CAN: Delete icon.
+        PLUS_CIRCLE: Create icon.
+        ENVELOPE_OPEN: Detail icon.
+        LIST_UL: List icon.
+        DATABASE_FILL_GEAR: Admin icon.
+        CLOCK_HISTORY: History icon.
+        ARROWS_COLLAPSE: Expand icon.
+        ARROW_CLOCKWISE: Refresh icon.
+        CHECK: Check icon.
+        X: X icon.
+        BOX_ARROW_UP: Check out icon.
+        BOX_ARROW_IN_DOWN: Check in icon.
+        UPDATE: Edit icon.
+        ADMIN: Admin icon.
+        DELETE: Delete icon.
+        CREATE: Create icon.
+        DETAIL: Detail icon.
+        LIST: List icon.
+        HISTORY: History icon.
+        CHECKOUT: Check out icon.
+        CHECKIN: Check in icon.
     """  # noqa: E501
 
     PENCIL = PENCIL.snippet

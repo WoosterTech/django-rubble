@@ -169,6 +169,16 @@ class NumberedModel(models.Model):
 
     Adds a `natural_key` method to the model, but no manager that uses it.
 
+    Example:
+
+        class Invoice(NumberedModel):
+            number_config = SerialNumberConfig(
+                    prefix="INV",
+                    width=4,
+                    initial_value=1,
+                    step=1
+                )
+
     Attributes:
         number_config: A SerialNumberConfig instance.
     """

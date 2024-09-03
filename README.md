@@ -1,6 +1,10 @@
 # django-rubble
 
+[![Ruff](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/v2.json)](https://github.com/astral-sh/ruff)
+[![image](https://img.shields.io/pypi/v/django-rubble.svg)](https://pypi.python.org/pypi/django-rubble)
+[![image](https://img.shields.io/pypi/pyversions/django-rubble.svg)](https://pypi.python.org/pypi/django-rubble)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://opensource.org/licenses/MIT)
+
 
 ## Description
 
@@ -11,13 +15,14 @@ Extend [django-model-utils](https://github.com/jazzband/django-model-utils) and 
 ## Features
 
 - Serialized Number Generation (e.g. PN-0001, PN-0001; MY1, MY2)
+    - [`NumberedModel`](models/number_models#django_rubble.models.number_models.NumberedModel)
 - Useful Model and Form fields
-  - `SimplePercentageField`
+    - [`SimplePercentageField`](fields/db_fields#django_rubble.fields.db_fields.SimplePercentageField)
 - Several Useful Utility Functions
-  - `is_number`: checks if number could be coerced to a `float`
-  - `ratio_to_whole`: .1 to 10; useful for percentages to "human"
-  - `whole_to_ration`: 10 to .1; useful for "human" to "percentages"
-  - perhaps others, see docs when they're published
+    - [`is_number`](utils/numbers#django_rubble.utils.numbers.is_number): checks if number could be coerced to a `float`
+    - [`ratio_to_whole`](utils/numbers#django_rubble.utils.numbers.ratio_to_whole): .1 to 10; useful for percentages to "human"
+    - [`whole_to_ratio`](utils/numbers#django_rubble.utils.numbers.whole_to_ratio): 10 to .1; useful for "human" to "percentages"
+    - perhaps others, see docs when they're published
 
 ## Installation
 

@@ -18,6 +18,8 @@ plugins:
         python:
           options:
             show_root_heading: true
+            extensions:
+              - griffe_fieldz
 
 nav:
   - Home: index.md
@@ -25,10 +27,13 @@ nav:
     - Checks:
       - checks/errors.md
       - checks/messages.md
+    - Fields:
+      - Django: fields/db_fields.md
     - Models:
       - models/number_models.md
     - Utilities:
       - utils/default_funcs.md
+      - utils/enums.md
       - utils/model_helpers.md
       - utils/numbers.md
   - Contributing: contributing.md
