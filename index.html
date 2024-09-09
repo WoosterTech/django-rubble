@@ -496,7 +496,7 @@
             
   
   <span class="md-ellipsis">
-    Models
+    Fields
   </span>
   
 
@@ -505,6 +505,70 @@
         
         <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            Fields
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="fields/db_fields/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Django
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_3" id="__nav_2_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Models
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_3">
             <span class="md-nav__icon md-icon"></span>
             Models
           </label>
@@ -553,10 +617,10 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_4" >
         
           
-          <label class="md-nav__link" for="__nav_2_3" id="__nav_2_3_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_2_4" id="__nav_2_4_label" tabindex="0">
             
   
   <span class="md-ellipsis">
@@ -567,8 +631,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_3_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_2_3">
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_4">
             <span class="md-nav__icon md-icon"></span>
             Utilities
           </label>
@@ -586,6 +650,27 @@
   
   <span class="md-ellipsis">
     Default funcs
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="utils/enums/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Enums
   </span>
   
 
@@ -825,7 +910,10 @@
 
 <!-- BEGIN INCLUDE ../README.md -->
 <h1 id="django-rubble">django-rubble</h1>
-<p><a href="https://opensource.org/licenses/MIT"><img alt="License" src="https://img.shields.io/badge/license-MIT-blue.svg" /></a></p>
+<p><a href="https://github.com/astral-sh/ruff"><img alt="Ruff" src="https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/v2.json" /></a>
+<a href="https://pypi.python.org/pypi/django-rubble"><img alt="image" src="https://img.shields.io/pypi/v/django-rubble.svg" /></a>
+<a href="https://pypi.python.org/pypi/django-rubble"><img alt="image" src="https://img.shields.io/pypi/pyversions/django-rubble.svg" /></a>
+<a href="https://opensource.org/licenses/MIT"><img alt="License" src="https://img.shields.io/badge/license-MIT-blue.svg" /></a></p>
 <h2 id="description">Description</h2>
 <p>Extend <a href="https://github.com/jazzband/django-model-utils">django-model-utils</a> and <a href="https://github.com/django-extensions/django-extensions">django-extensions</a>.</p>
 <blockquote>
@@ -833,14 +921,21 @@
 </blockquote>
 <h2 id="features">Features</h2>
 <ul>
-<li>Serialized Number Generation (e.g. PN-0001, PN-0001; MY1, MY2)</li>
-<li>Useful Model and Form fields</li>
-<li><code>SimplePercentageField</code></li>
-<li>Several Useful Utility Functions</li>
-<li><code>is_number</code>: checks if number could be coerced to a <code>float</code></li>
-<li><code>ratio_to_whole</code>: .1 to 10; useful for percentages to "human"</li>
-<li><code>whole_to_ration</code>: 10 to .1; useful for "human" to "percentages"</li>
+<li>Serialized Number Generation (e.g. PN-0001, PN-0001; MY1, MY2)<ul>
+<li><a href="../models/number_models#django_rubble.models.number_models.NumberedModel"><code>NumberedModel</code></a></li>
+</ul>
+</li>
+<li>Useful Model and Form fields<ul>
+<li><a href="../fields/db_fields#django_rubble.fields.db_fields.SimplePercentageField"><code>SimplePercentageField</code></a></li>
+</ul>
+</li>
+<li>Several Useful Utility Functions<ul>
+<li><a href="../utils/numbers#django_rubble.utils.numbers.is_number"><code>is_number</code></a>: checks if number could be coerced to a <code>float</code></li>
+<li><a href="../utils/numbers#django_rubble.utils.numbers.ratio_to_whole"><code>ratio_to_whole</code></a>: .1 to 10; useful for percentages to "human"</li>
+<li><a href="../utils/numbers#django_rubble.utils.numbers.whole_to_ratio"><code>whole_to_ratio</code></a>: 10 to .1; useful for "human" to "percentages"</li>
 <li>perhaps others, see docs when they're published</li>
+</ul>
+</li>
 </ul>
 <h2 id="installation">Installation</h2>
 <h3 id="from-pypi">From PyPI</h3>
