@@ -198,3 +198,27 @@ class NumberedModel(models.Model):
 
     def natural_key(self):
         return (self.number,)
+
+    @classmethod
+    def check(cls, **kwargs):
+        errors = super().check(**kwargs)
+        errors.extend(cls._check_number_config(**kwargs))
+        return errors
+
+    @classmethod
+    def _check_number_config(cls, **kwargs):
+        if not hasattr(cls, "number_config"):
+            return must_be(
+                "a SerialNumberConfig instance",
+                option="number_config",
+                obj=cls,
+                error_id="rubble.M003",
+            )
+        if not isinstance(cls.number_config, SerialNumberConfig):
+            return must_be(
+                "a SerialNumberConfig instance",
+                option="number_config",
+                obj=cls,
+                error_id="rubble.M003",
+            )
+        return []
