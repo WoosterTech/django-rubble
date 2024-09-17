@@ -670,6 +670,27 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../strings/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Strings
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -840,13 +861,35 @@
     <div class="doc doc-contents ">
 
       <p>Return the current datetime in the timezone of the Django settings.</p>
+<p>Example:</p>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>from django_rubble.utils.default_funcs import django_now
+django_now()
+datetime.datetime(2021, 1, 1, 0, 0, tzinfo=<UTC>)</p>
+</blockquote>
+</blockquote>
+</blockquote>
 
             <details class="quote">
               <summary>Source code in <code>django_rubble\utils\default_funcs.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">13</span>
-<span class="normal">14</span>
-<span class="normal">15</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">django_now</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">datetime</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Return the current datetime in the timezone of the Django settings.&quot;&quot;&quot;</span>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span>
+<span class="normal">26</span>
+<span class="normal">27</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">django_now</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">datetime</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Return the current datetime in the timezone of the Django settings.</span>
+
+<span class="sd">    Example:</span>
+<span class="sd">    &gt;&gt;&gt; from django_rubble.utils.default_funcs import django_now</span>
+<span class="sd">    &gt;&gt;&gt; django_now()</span>
+<span class="sd">    datetime.datetime(2021, 1, 1, 0, 0, tzinfo=&lt;UTC&gt;)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="n">timezone</span><span class="o">.</span><span class="n">now</span><span class="p">()</span>
 </code></pre></div></td></tr></table></div>
             </details>
@@ -867,12 +910,37 @@
 
       <p>Return the current date in the timezone of the Django settings.</p>
 
+
+<details class="example" open>
+  <summary>Example</summary>
+  <blockquote>
+<blockquote>
+<blockquote>
+<p>from django_rubble.utils.default_funcs import django_today
+django_today()
+datetime.date(2021, 1, 1)</p>
+</blockquote>
+</blockquote>
+</blockquote>
+</details>
             <details class="quote">
               <summary>Source code in <code>django_rubble\utils\default_funcs.py</code></summary>
               <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 8</span>
 <span class="normal"> 9</span>
-<span class="normal">10</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">django_today</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">date</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Return the current date in the timezone of the Django settings.&quot;&quot;&quot;</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">django_today</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">date</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Return the current date in the timezone of the Django settings.</span>
+
+<span class="sd">    Example:</span>
+<span class="sd">        &gt;&gt;&gt; from django_rubble.utils.default_funcs import django_today</span>
+<span class="sd">        &gt;&gt;&gt; django_today()</span>
+<span class="sd">        datetime.date(2021, 1, 1)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="n">timezone</span><span class="o">.</span><span class="n">now</span><span class="p">()</span><span class="o">.</span><span class="n">date</span><span class="p">()</span>
 </code></pre></div></td></tr></table></div>
             </details>
