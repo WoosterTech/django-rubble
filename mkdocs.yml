@@ -36,6 +36,7 @@ nav:
       - utils/enums.md
       - utils/model_helpers.md
       - utils/numbers.md
+      - utils/strings.md
   - Contributing: contributing.md
   - Changelog: changelog.md
 

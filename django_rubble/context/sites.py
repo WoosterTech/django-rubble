@@ -1,6 +1,8 @@
 import logging
-from typing import TYPE_CHECKING, Any
+import sys
+from typing import TYPE_CHECKING, Any, Literal
 
+from django import get_version
 from django.apps import apps
 from django.views import View
 from neapolitan.views import Role
@@ -102,6 +104,29 @@ class ProjectApp(BaseModel):
 
 class ProjectRegistry(BaseModel):
     apps: list[ProjectApp] = []
+    _django_version: str | None = None
+    _python_version: (
+        tuple[int, int, int, Literal["alpha", "beta", "candidate", "final"], int] | None
+    ) = None
+    project_version: str = ""
+
+    @property
+    def django_version(self):
+        if self._django_version is None:
+            self._django_version = get_version()
+
+        return self._django_version
+
+    @property
+    def python_version(self) -> str:
+        if self._python_version is None:
+            self._python_version = sys.version_info
+        # "major.minor.micro_releaselevel" format e.g. "3.9.7_final"
+        return (
+            f"{self._python_version.major}."
+            f"{self._python_version.minor}.{self._python_version.micro}_"
+            f"{self._python_version.releaselevel}"
+        )
 
     def register(self, app: ProjectApp | tuple[str, tuple[str, type[View]]]):
         """Registers a model/app with the project.

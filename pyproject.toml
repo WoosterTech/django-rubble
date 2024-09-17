@@ -29,6 +29,7 @@ pydantic = "^2.6.4"
 loguru = "^0.7.2"
 croniter = "^3.0.3"
 neapolitan = {version = "^24.6", optional = true}
+django-simple-history = {version = "^3.7.0", optional = true}
 
 [tool.poetry.group.dev]
 optional = true
@@ -64,6 +65,9 @@ griffe-fieldz = "^0.2.0"
 
 [tool.poetry.extras]
 project = ["neapolitan"]
+history = ["django-simple-history"]
+
+all = ["neapolitan", "django-simple-history"]
 
 [tool.ruff]
 # Exclude a variety of commonly ignored directories.
