@@ -1,3 +1,9 @@
+## 0.6.0 (2024-09-17)
+
+### Feat
+
+- **context**: cache versions in ProjectRegistry to avoid db hits before apps are ready
+
 ## 0.5.2 (2024-08-30)
 
 ## 0.5.1 (2024-08-29)
