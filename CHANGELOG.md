@@ -1,3 +1,9 @@
+## 0.7.0b0 (2024-09-18)
+
+### Feat
+
+- **utils**: add `truncate_string` function with tests and docs
+
 ## 0.6.0 (2024-09-17)
 
 ### Feat
