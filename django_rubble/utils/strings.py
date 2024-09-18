@@ -83,3 +83,37 @@ def truncate_secret(
     assert len(new_string) <= max_length
 
     return new_string
+
+
+def truncate_string(string_input: str, num_char: int, *, postfix: str = "...") -> str:
+    """Truncate string and add postfix to end.
+
+    Examples:
+        >>> truncate_string("This is a long string", 10)
+        'This is...'
+        >>> truncate_string("This is a long string", 10, postfix="..")
+        'This is..'
+        >>> truncate_string("This is a long string", 20, postfix="..")
+        'This is a long str..'
+        >>> truncate_string("This is a long string", 25)
+        'This is a long string'
+
+    Args:
+      string_input: string to be truncated
+      num_char: number of characters in returned string
+      postfix: characters to use at end of string
+
+    Returns:
+      Shortened string including postfix if truncation was required, else original
+        string is returned.
+    """
+    string_input = string_input.strip()
+    if len(string_input) > num_char:
+        if len(postfix) >= num_char:
+            return postfix[:num_char]
+        string_length = num_char - len(postfix)
+        new_string = string_input[:string_length]
+        new_string = new_string.strip()
+        return f"{new_string}{postfix}"
+
+    return string_input
