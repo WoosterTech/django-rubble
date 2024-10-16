@@ -1,3 +1,8 @@
+import random
+from collections.abc import Callable
+from enum import Enum, StrEnum
+
+
 def sort_title(title: str) -> str:
     """Sort a title by the first word, ignoring articles.
 
@@ -117,3 +122,42 @@ def truncate_string(string_input: str, num_char: int, *, postfix: str = "...") -
         return f"{new_string}{postfix}"
 
     return string_input
+
+
+class Alphabet(StrEnum):
+    """Alphabets for generating UUID-like strings."""
+
+    UNAMBIGUOUS_DIGITS = "23456789"  # No 0, 1
+    UNAMBIGUOUS_LOWER = "abcdefghijkmnopqrstuvwxyz"  # No l
+    UNAMBIGUOUS_UPPER = "ABCDEFGHJKLM"  # No I, L, O
+    UNAMBIGUOUS_SPECIAL = "!@#$%^&*"  # No ()[]{}<> or /\
+    UNAMBIGUOUS = (
+        UNAMBIGUOUS_DIGITS + UNAMBIGUOUS_LOWER + UNAMBIGUOUS_UPPER + UNAMBIGUOUS_SPECIAL
+    )
+    UNAMBIGUOUS_ALPHANUMERIC_LOWER = UNAMBIGUOUS_DIGITS + UNAMBIGUOUS_LOWER
+    UNAMBIGUOUS_ALPHANUMERIC_UPPER = UNAMBIGUOUS_DIGITS + UNAMBIGUOUS_UPPER
+    UNAMBIGUOUS_ALPHANUMERIC = (
+        UNAMBIGUOUS_DIGITS + UNAMBIGUOUS_LOWER + UNAMBIGUOUS_UPPER
+    )
+
+
+def uuid_ish(
+    length: int,
+    *,
+    alphabet: str | Callable[[], str] = Alphabet.UNAMBIGUOUS_ALPHANUMERIC,
+) -> str:
+    """Generate a UUID-like string using the specified alphabet.
+
+    Re-run if collision detected.
+
+    Args:
+        alphabet: The alphabet to use for the UUID-like string.
+
+    Returns:
+        str: The UUID-like string.
+    """
+    if isinstance(alphabet, Enum):
+        alphabet = alphabet.value
+    if isinstance(alphabet, Callable):
+        alphabet = alphabet()
+    return "".join(random.choices(alphabet, k=length))  # noqa: S311 # not used for cryptography
