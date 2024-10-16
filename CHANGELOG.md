@@ -1,3 +1,9 @@
+## 0.7.0b1 (2024-10-16)
+
+### Feat
+
+- **strings.py**: add uuid_ish function
+
 ## 0.7.0b0 (2024-09-18)
 
 ### Feat
