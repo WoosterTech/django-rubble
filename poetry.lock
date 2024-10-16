@@ -1827,4 +1827,4 @@ project = ["neapolitan"]
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.10"
-content-hash = "1e543b73615d4fb7a9c2dca273d7b7a700d5dcbc5830fa4de70c5f5ba74adc82"
+content-hash = "a5c52fc3745010a2a8904e3c58fd0f451d68116fd6af08cb0288fc109d1de1e9"
