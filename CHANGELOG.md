@@ -1,3 +1,9 @@
+## 0.7.0b5 (2024-10-17)
+
+### Fix
+
+- **Secrets**: cast client secret to LongSecretStr explicitly when read from environment
+
 ## 0.7.0b4 (2024-10-17)
 
 ## 0.7.0b3 (2024-10-17)
