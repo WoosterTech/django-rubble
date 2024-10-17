@@ -1,3 +1,9 @@
+## 0.7.0b3 (2024-10-17)
+
+### Feat
+
+- **secrets**: add secrets module for Infisical and creating sample env file from settings.py
+
 ## 0.7.0b2 (2024-10-16)
 
 ## 0.7.0b1 (2024-10-16)
