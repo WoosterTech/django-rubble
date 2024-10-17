@@ -38,7 +38,7 @@ class Secrets(BaseModel):
     """
 
     client_id: str = getenv("INFISICAL_CLIENT_ID")
-    client_secret: LongSecretStr = getenv("INFISICAL_CLIENT_SECRET")
+    client_secret: LongSecretStr = LongSecretStr(getenv("INFISICAL_CLIENT_SECRET"))
     project_id: str = getenv("INFISICAL_PROJECT_ID")
     environment: Literal["prod", "dev", "staging"] = getenv(
         "INFISICAL_ENVIRONMENT", default="dev"
