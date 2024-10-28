@@ -1958,4 +1958,4 @@ secrets = ["infisical-python"]
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.10"
-content-hash = "bc096cfc1a37cc366a5f8f541c26aea9c086d817bbd1b99705cb3df55b1257bb"
+content-hash = "95eb8805c565ab1c65330f98721fe49f353e324164994618939a8f99725cf043"
