@@ -106,10 +106,11 @@ class LibraryIcon(StrEnum):
     CLOCK_HISTORY = CLOCK_HISTORY.snippet
     ARROWS_COLLAPSE = ARROWS_COLLAPSE.snippet
     ARROW_CLOCKWISE = '<i class="bi bi-arrow-clockwise"></i>'
-    CHECK = '<i class="bi bi-check2-square">'
+    CHECK = '<i class="bi bi-check2-square"></i>'
     X = '<i class="bi bi-x"></i>'
     BOX_ARROW_UP = '<i class="bi bi-box-arrow-up"></i>'
     BOX_ARROW_IN_DOWN = '<i class="bi bi-box-arrow-in-down"></i>'
+    CALCULATOR = '<i class="bi bi-calculator"></i>'
 
     UPDATE = PENCIL
     ADMIN = DATABASE_FILL_GEAR
