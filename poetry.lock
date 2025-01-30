@@ -1104,13 +1104,13 @@ files = [
 
 [[package]]
 name = "neapolitan"
-version = "24.6"
+version = "24.8"
 description = "Neapolitan: quick CRUD views for Django."
 optional = true
 python-versions = "*"
 files = [
-    {file = "neapolitan-24.6-py2.py3-none-any.whl", hash = "sha256:2315b23fdfac09c380fd3e3899af237b77db702f60e6779e66dd9f133bce571b"},
-    {file = "neapolitan-24.6.tar.gz", hash = "sha256:0c84963a4b5cab2411952ee5bd939adbb8987ef27b3a53ca1399ab607b691cab"},
+    {file = "neapolitan-24.8-py2.py3-none-any.whl", hash = "sha256:8551e5e6d00f81920a248f1b1267ef5caaa46d14a67e7bb4ae1856a260787e7b"},
+    {file = "neapolitan-24.8.tar.gz", hash = "sha256:ae45b2133bb15dfc48edbfb35f625b4c37d77d6586857cc51e45dd3932d88a01"},
 ]
 
 [package.dependencies]
