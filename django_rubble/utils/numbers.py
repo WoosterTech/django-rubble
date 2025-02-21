@@ -161,7 +161,7 @@ class Percent(BaseModel):
     decimal_places: int | None = None
     has_decimal_places: bool | None = None
 
-    def model_post_init(self, __context: Any) -> None:
+    def model_post_init(self, __context: Any) -> None:  # noqa: PYI063
         new_value = trim_trailing_zeros(self.value)
         per_hundred_dec = trim_trailing_zeros(ratio_to_whole(self.value))
 

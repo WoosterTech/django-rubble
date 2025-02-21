@@ -3,7 +3,7 @@ from pathlib import Path
 from typing import override
 
 from loguru import logger
-from rich import print
+from rich import print as rich_print
 
 
 class SecretsFinder(ast.NodeVisitor):
@@ -44,6 +44,6 @@ if __name__ == "__main__":
     output_file_path = ".env.sample"
 
     secrets = find_secrets_in_settings(settings_file_path)
-    print(f"Secrets found in settings file: {secrets}")
+    rich_print(f"Secrets found in settings file: {secrets}")
     create_env_sample(secrets, output_file_path)
-    print(f"Sample .env file created at {output_file_path}")
+    rich_print(f"Sample .env file created at {output_file_path}")
