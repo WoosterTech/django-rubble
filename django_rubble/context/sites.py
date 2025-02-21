@@ -1,12 +1,16 @@
 import logging
 import sys
+from enum import Enum
 from typing import TYPE_CHECKING, Any, Literal
 
 from django import get_version
 from django.apps import apps
+from django.conf import settings
 from django.views import View
 from neapolitan.views import Role
 from pydantic import BaseModel, field_validator, model_serializer
+
+from django_rubble.context import PydanticBase
 
 if TYPE_CHECKING:
     from django_stubs_ext import StrOrPromise
@@ -100,6 +104,57 @@ class ProjectApp(BaseModel):
 
             model = ModelViewsConfiguration(verbose_name=model[0], views_class=model[1])
         self.registered_models.append(model)
+
+
+class RegistryBase(type):
+    REGISTRY = {}
+
+    def __new__(cls, name: str, bases: tuple[type, ...], attrs: dict[str, Any]):
+        new_cls = type.__new__(cls, name, bases, attrs)
+        cls.REGISTRY[new_cls.__name__.lower()] = new_cls
+        return new_cls
+
+    @classmethod
+    def get_registry(cls):
+        return dict(cls.REGISTRY)
+
+
+def base_url_format() -> str:
+    return getattr(settings, "RUBBLE_BASE_URL_FORMAT", "{app_name}/{model_name}/")
+
+
+class RoleConfig(PydanticBase):
+    path_fragment: str | None = None
+    name_suffix: str
+
+    def render_fragment(self, **kwargs):
+        return self.path_fragment.format(**kwargs) or ""
+
+    def render_name(self, model_name: str):
+        return f"{model_name}_{self.name_suffix}"
+
+
+class RoleMapping(Enum):
+    LIST = RoleConfig(name_suffix="list")
+    CREATE = RoleConfig(path_fragment="new/", name_suffix="create")
+    READ = RoleConfig(path_fragment="{lookup_kwarg}/", name_suffix="detail")
+    UPDATE = RoleConfig(path_fragment="{lookup_kwarg}/edit/", name_suffix="update")
+    DELETE = RoleConfig(path_fragment="{lookup_kwarg}/delete/", name_suffix="delete")
+
+    def __get__(self, *_):
+        return self.value
+
+
+def url_builder(
+    app_name: str, model_name: str, view_mapping: RoleConfig = RoleMapping.LIST
+):
+    return (
+        f"{app_name}/{model_name}/{view_mapping.render_fragment(model_name=model_name)}"
+    )
+
+
+class ViewRegistryBase(metaclass=RegistryBase):
+    pass
 
 
 class ProjectRegistry(BaseModel):
