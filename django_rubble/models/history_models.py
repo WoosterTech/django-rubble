@@ -1,5 +1,9 @@
-import copy
+"""Provides history models with enhanced tracking features."""
 
+import copy
+from typing import TYPE_CHECKING, Generic, Self, TypeVar
+
+from django.conf import settings
 from django.contrib import admin
 from django.db import models
 from django.db.models.fields.proxy import OrderWrt
@@ -10,14 +14,21 @@ from simple_history.models import transform_field
 
 from . import override
 
+if TYPE_CHECKING:
+    from django.contrib.auth.models import AbstractUser
 
-class HistoricalRecords(BaseHistoricalRecords):
+AUTH_USER_MODEL = getattr(settings, "AUTH_USER_MODEL", "auth.User")
+
+_ModelT = TypeVar("_ModelT", bound=models.Model)
+
+
+class HistoricalRecords(BaseHistoricalRecords[_ModelT], Generic[_ModelT]):
     """Custom HistoricalRecords to handle StatusField and OrderWrt."""
 
     @override
-    def copy_fields(self, model):
+    def copy_fields(self, model: models.Model):
         """Add handling for StatusField."""
-        fields = {}
+        fields: dict[str, models.Field] = {}
         for og_field in self.fields_included(model):
             field = copy.copy(og_field)
             field.remote_field = copy.copy(field.remote_field)
@@ -88,35 +99,75 @@ class HistoryStampManager(HistoryManager):
         return self.order_by("-history_date").first()
 
 
-class HistoryModel(models.Model):
-    """Adds useful tracking fields.
+class HistoryModel(models.Model):  # noqa: DJ008
+    """Adds useful tracking fields with queryable user fields.
+
+    Fields:
+      created_by (ForeignKey): User who created the instance (from history)
+      modified_by (ForeignKey): User who last modified the instance (from history)
 
     Properties:
-      created_by (str): history_user from first history record
       created (datetime): history_date from first history record
-      modified_by (str): history_user from last history record
       modified (datetime): history_date from last history record
     """
 
-    history = HistoricalRecords(history_manager=HistoryStampManager, inherit=True)
+    created_by: models.ForeignKey = models.ForeignKey(
+        AUTH_USER_MODEL,
+        on_delete=models.SET_NULL,  # pyright: ignore[reportUnknownMemberType, reportUnknownArgumentType]
+        null=True,
+        blank=True,
+        editable=False,
+        related_name="+",
+        help_text="User who created this instance",
+    )
+    modified_by: models.ForeignKey = models.ForeignKey(
+        AUTH_USER_MODEL,
+        on_delete=models.SET_NULL,  # pyright: ignore[reportUnknownMemberType, reportUnknownArgumentType]
+        null=True,
+        blank=True,
+        editable=False,
+        related_name="+",
+        help_text="User who last modified this instance",
+    )
 
-    class Meta:
-        abstract = True
+    history: HistoricalRecords[Self] = HistoricalRecords(
+        history_manager=HistoryStampManager, inherit=True
+    )
 
-    @property
-    @admin.display
-    def created_by(self):
-        return self.history.created().history_user
+    class Meta:  # noqa: D106
+        abstract: bool = True
+
+    @override
+    def save(self, *args, **kwargs):
+        """Save and update created_by/modified_by from history."""
+        # First, save the model so history is created
+        super().save(*args, **kwargs)
+
+        # Update tracking fields from history if they're not set
+        update_needed = False
+
+        if self.created_by is None:
+            first_history = self.history.order_by("history_date").first()
+            if first_history and first_history.history_user:
+                self.created_by = first_history.history_user
+                update_needed = True
+
+        # Always update modified_by from latest history
+        last_history = self.history.order_by("-history_date").first()
+        if last_history and last_history.history_user:
+            if self.modified_by != last_history.history_user:
+                self.modified_by = last_history.history_user
+                update_needed = True
+
+        # Save again if we updated the tracking fields
+        if update_needed:
+            # Use update_fields to avoid recursion and additional history entry
+            super().save(update_fields=["created_by", "modified_by"])
 
     @property
     @admin.display
     def created(self):
         return self.history.created().history_date
-
-    @property
-    @admin.display
-    def modified_by(self):
-        return self.history.modified().history_user
 
     @property
     @admin.display

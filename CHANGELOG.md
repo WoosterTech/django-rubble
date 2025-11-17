@@ -1,3 +1,14 @@
+## Unreleased
+
+### BREAKING CHANGE
+
+- **HistoryModel**: `created_by` and `modified_by` are now actual ForeignKey fields instead of properties. This enables efficient querying and filtering. Existing code that only reads these fields will continue to work, but you'll need to run migrations to add the new database columns.
+
+### Feat
+
+- **HistoryModel**: Add queryable `created_by` and `modified_by` ForeignKey fields that automatically populate from historical records
+- **HistoryAdmin**: Add admin classes for displaying HistoryModel tracking fields as read-only
+
 ## 0.7.0b7 (2024-12-02)
 
 ### Fix

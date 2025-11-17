@@ -1,0 +1,7 @@
+{
+    "include": ["django_rubble", "tests", "devtools"],
+    "reportIgnoreCommentWithoutRule": false,
+    "reportUnnecessaryTypeIgnoreComment": false,
+    "reportMissingTypeStubs": false,
+    "reportUnusedCallResult": false,
+}

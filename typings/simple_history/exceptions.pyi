@@ -1,0 +1,23 @@
+
+
+
+class MultipleRegistrationsError(Exception):
+    ...
+
+
+
+class NotHistoricalModelError(TypeError):
+    ...
+
+
+
+class RelatedNameConflictError(Exception):
+    ...
+
+
+
+class AlternativeManagerError(Exception):
+    ...
+
+
+

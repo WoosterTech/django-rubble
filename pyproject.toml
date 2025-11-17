@@ -54,12 +54,12 @@ classifiers = [
 optional = true
 
 [tool.poetry.group.dev.dependencies]
-mypy = "^1.10.0"
 pre-commit = "^3.7.1"
 commitizen = "^3.27.0"
-django-stubs = { version = "^5.0.2", extras = ["compatible-mypy"] }
 types-toml = "^0.10.8.20240310"
 deptry = "^0.23.0"
+basedpyright = "^1.33.0"
+django-types = "^0.22.0"
 
 [tool.poetry.group.test]
 optional = true
