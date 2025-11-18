@@ -19,9 +19,9 @@ Extend [django-model-utils](https://github.com/jazzband/django-model-utils) and 
 - Useful Model and Form fields
     - [`SimplePercentageField`](fields/db_fields#django_rubble.fields.db_fields.SimplePercentageField)
 - Several Useful Utility Functions
-    - [`is_number`](utils/numbers#django_rubble.utils.numbers.is_number): checks if number could be coerced to a `float`
-    - [`ratio_to_whole`](utils/numbers#django_rubble.utils.numbers.ratio_to_whole): .1 to 10; useful for percentages to "human"
-    - [`whole_to_ratio`](utils/numbers#django_rubble.utils.numbers.whole_to_ratio): 10 to .1; useful for "human" to "percentages"
+    - [`is_number`](utils/numeric_utils#django_rubble.utils.numeric_utils.is_number): checks if number could be coerced to a `float`
+    - [`ratio_to_whole`](utils/numeric_utils#django_rubble.utils.numeric_utils.ratio_to_whole): .1 to 10; useful for percentages to "human"
+    - [`whole_to_ratio`](utils/numeric_utils#django_rubble.utils.numeric_utils.whole_to_ratio): 10 to .1; useful for "human" to "percentages"
     - perhaps others, see docs when they're published
 
 ## Installation

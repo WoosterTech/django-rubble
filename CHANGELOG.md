@@ -1,3 +1,22 @@
+## 0.7.0 (2025-11-18)
+
+### Feat
+
+- **utils**: renamed `django_rubble.utils.numbers` module to `django_rubble.utils.numeric_utils`
+
+## v0.7.0b6 (2025-11-17)
+
+### Fix
+
+- **deps**: update dependency rich to v13.9.4
+- **deps**: update dependency pydantic to v2.10.6
+- **deps**: update dependency typer to ^0.15.0
+- **deps**: update dependency loguru to v0.7.3
+- **deps**: update dependency neapolitan to v24.8
+- **deps**: update dependency django-simple-history to v3.8.0
+- **deps**: update dependency croniter to v3.0.4
+- **deps**: update dependency django to v5.1.5 [security]
+
 ## 0.7.0b7 (2024-12-02)
 
 ### Fix

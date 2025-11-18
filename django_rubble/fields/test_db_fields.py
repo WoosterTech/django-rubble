@@ -17,4 +17,4 @@ def test_simple_percentage_field(value: int | None, expected: int | None):
     field = SimplePercentageField(max_digits=3, decimal_places=value)
 
     assert field.humanize_decimal_places == expected
-    assert isinstance(field.formfield(), SimplePercentageFormField)
+    assert isinstance(field.formfield(), SimplePercentageFormField)  # pyright: ignore[reportUnknownMemberType]
