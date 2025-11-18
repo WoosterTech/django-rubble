@@ -215,7 +215,7 @@ class Percent(BaseModel):
         ratio_decimal = whole_to_ratio(val)
         return cls(value=ratio_decimal, decimal_places=field_decimal_places)
 
-    def __mul__(self, other: float | Decimal):
+    def __mul__(self, other: float | int | Decimal | object):
         """Multiply using the ratio (out of 1) instead of human-readable out of 100
 
         Examples:
@@ -223,6 +223,9 @@ class Percent(BaseModel):
             Decimal('3')
             >>> Percent(1) * 100
             Decimal('100')"""
+        if not is_number(other):
+            return NotImplemented
+        assert isinstance(other, (float, int, Decimal))
         match self.value:
             case float() | int():
                 return self.value * float(other)
