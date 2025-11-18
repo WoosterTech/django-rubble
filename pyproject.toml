@@ -64,7 +64,7 @@ secrets = ["infisical-python (>=2.3.5)"]
 dev = [
   "basedpyright>=1.33.0",
   "commitizen>=3.27.0,<4",
-  "deptry>=0.23.0,<0.24",
+  "deptry>=0.24,<0.25",
   "django-types>=0.22.0",
   "pre-commit>=3.7.1,<4",
   "rich>=14.2.0",
