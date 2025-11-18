@@ -15,4 +15,7 @@
     "python.testing.unittestEnabled": false,
     "python.testing.pytestEnabled": true,
     "python.languageServer": "None",
+    "github-actions.workflows.pinned.workflows": [
+        ".github/workflows/publish.yml"
+    ],
 }
