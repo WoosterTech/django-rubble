@@ -31,12 +31,16 @@ wheels = [
 
 [[package]]
 name = "attrmagic"
-version = "0.2.0b3"
-source = { git = "https://github.com/WoosterTech/AttrMagic.git#1bc9c6dc707a951c3e15a4f868decaf47b824876" }
+version = "0.2.0"
+source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "pydantic" },
     { name = "pydantic-core" },
     { name = "typing-extensions", marker = "python_full_version < '3.12'" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/1f/ab/76a21f8369bf906c54a75420706f8a66405d26493b59f59a212fe198f96a/attrmagic-0.2.0.tar.gz", hash = "sha256:737be1351ccd2b2c841b9aa8b106dab87d156cba5b10e3c433621c61070f3bf8", size = 56695, upload-time = "2025-11-18T20:13:35.068Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/2d/00/52f9fdb70f673e6219aafd247771c6c855307906afe3ffc7d3cdd8dff623/attrmagic-0.2.0-py3-none-any.whl", hash = "sha256:1aac5641ba8400f811395ce9cc7401a95544e6dd768a85bbf0ba0e05ee832c2b", size = 12194, upload-time = "2025-11-18T20:13:34.307Z" },
 ]
 
 [[package]]
@@ -478,7 +482,7 @@ test = [
 
 [package.metadata]
 requires-dist = [
-    { name = "attrmagic", git = "https://github.com/WoosterTech/AttrMagic.git" },
+    { name = "attrmagic", specifier = ">=0.2.0" },
     { name = "case-converter", specifier = ">=1.2.0,<2.0.0" },
     { name = "croniter", specifier = ">=3.0" },
     { name = "django", specifier = ">4,<5.3" },

@@ -20,7 +20,6 @@ keywords = [
 #   "Framework :: Django :: 5.1",
 # ]
 dependencies = [
-  "attrmagic",
   "case-converter (>=1.2.0,<2.0.0)",
   "croniter (>=3.0)",
   "django-model-utils (>=4.5)",
@@ -32,6 +31,7 @@ dependencies = [
   "pydantic (>=2.7)",
   "toml (>=0.10.2,<0.11.0)",
   "typing-extensions (>=4.5) ; python_version < '3.12'",
+  "attrmagic>=0.2.0",
 ]
 dynamic = ["classifiers", "version"]
 
@@ -127,9 +127,6 @@ default-groups = [
   "test",
   "docs",
 ]
-
-[tool.uv.sources]
-attrmagic = { git = "https://github.com/WoosterTech/AttrMagic.git" }
 
 [tool.uv-dynamic-versioning]
 bump = true
