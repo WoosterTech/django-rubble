@@ -135,3 +135,4 @@ attrmagic = { git = "https://github.com/WoosterTech/AttrMagic.git" }
 bump = true
 vcs = "git"
 style = "pep440"
+pattern = "default-unprefixed"
