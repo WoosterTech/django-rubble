@@ -1,6 +1,6 @@
 import random
 from collections.abc import Callable
-from enum import Enum, StrEnum
+from enum import StrEnum
 
 
 def sort_title(title: str) -> str:
@@ -156,8 +156,13 @@ def uuid_ish(
     Returns:
         str: The UUID-like string.
     """
-    if isinstance(alphabet, Enum):
-        alphabet = alphabet.value
-    if isinstance(alphabet, Callable):
-        alphabet = alphabet()
+    alphabet = alphabet if not isinstance(alphabet, Callable) else alphabet()
     return "".join(random.choices(alphabet, k=length))  # noqa: S311 # not used for cryptography
+
+
+if __name__ == "__main__":
+    from rich import print as rprint
+
+    test_string = "".join(random.choices(Alphabet.UNAMBIGUOUS_ALPHANUMERIC, k=12))
+
+    rprint(f"Generated UUID-ish string: [bold green]{test_string}[/]")

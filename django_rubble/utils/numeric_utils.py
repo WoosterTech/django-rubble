@@ -1,10 +1,10 @@
 from decimal import Decimal, DecimalTuple
-from typing import Any, TypeVar
+from typing import TypeVar, overload, override
 
 from pydantic import BaseModel
 
 
-def is_number(s: Any) -> bool:
+def is_number(s: object) -> bool:
     """Check if a value can be coerced into a number type.
 
     Examples:
@@ -23,14 +23,14 @@ def is_number(s: Any) -> bool:
     if s is None:
         return False
     try:
-        float(s)
+        _ = float(s)  # pyright: ignore[reportArgumentType]
     except ValueError:
         return False
     else:
         return True
 
 
-def any_to_float(s: Any, default: float = 0) -> float:
+def any_to_float(s: object, default: float = 0) -> float:
     """Cast value as float, return default if invalid type.
 
     Examples:
@@ -48,7 +48,7 @@ def any_to_float(s: Any, default: float = 0) -> float:
         msg = f"Default must be of type `float` [{default}]"
         raise TypeError(msg)
     try:
-        value_float = float(s)
+        value_float = float(s)  # pyright: ignore[reportArgumentType]
     except ValueError:
         value_float = default
 
@@ -58,6 +58,10 @@ def any_to_float(s: Any, default: float = 0) -> float:
 T = TypeVar("T", int, float, Decimal)
 
 
+@overload
+def ratio_to_whole(ratio: int | float) -> float: ...
+@overload
+def ratio_to_whole(ratio: Decimal) -> Decimal: ...
 def ratio_to_whole(ratio: T) -> T:
     """Convert a ratio to a whole number.
 
@@ -75,12 +79,17 @@ def ratio_to_whole(ratio: T) -> T:
     Returns:
         The whole number.
     """
-    multiplier = Decimal("100") if isinstance(ratio, Decimal) else 100
+    if isinstance(ratio, Decimal):
+        return ratio * Decimal("100")
 
-    return ratio * multiplier
+    return ratio * 100
 
 
-def whole_to_ratio(whole: T) -> T:
+@overload
+def whole_to_ratio(whole: int | float) -> float: ...
+@overload
+def whole_to_ratio(whole: Decimal) -> Decimal: ...
+def whole_to_ratio(whole: int | float | Decimal) -> float | Decimal:
     """Convert a whole number to a ratio.
 
     This is useful for converting a percentage to a ratio.
@@ -97,11 +106,14 @@ def whole_to_ratio(whole: T) -> T:
     Returns:
         The ratio. Decimal
     """
-    multiplier = Decimal("100") if isinstance(whole, Decimal) else 100
-    return whole / multiplier
+    match whole:
+        case Decimal():
+            return whole / Decimal("100")
+        case _:
+            return whole / 100
 
 
-def trim_trailing_zeros(value: T) -> Decimal:
+def trim_trailing_zeros(value: float | Decimal | str) -> Decimal:
     """Remove trailing zeros from a decimal value.
 
     This is useful for ensuring that a value can be safely compared with another value.
@@ -143,6 +155,7 @@ def set_zero(value: T) -> Decimal:
     return decimal_from_string
 
 
+# TODO: this should *not* be a pydantic model
 class Percent(BaseModel):
     """A model for handling percentages.
 
@@ -156,14 +169,17 @@ class Percent(BaseModel):
         has_decimal_places (bool): Whether the value has decimal places.
     """
 
-    value: Decimal | float | str
-    per_hundred: Decimal | float | str | None = None
+    value: Decimal | float
+    per_hundred: Decimal | float | None = None
     decimal_places: int | None = None
     has_decimal_places: bool | None = None
 
-    def model_post_init(self, __context: Any) -> None:  # noqa: PYI063
-        new_value = trim_trailing_zeros(self.value)
-        per_hundred_dec = trim_trailing_zeros(ratio_to_whole(self.value))
+    @override
+    def model_post_init(self, __context: object) -> None:  # noqa: PYI063
+        value_decimal = Decimal(str(self.value))
+        new_value = trim_trailing_zeros(value_decimal)
+
+        per_hundred_dec = trim_trailing_zeros(ratio_to_whole(value_decimal))
 
         if self.decimal_places is not None:
             new_value = round(new_value, self.decimal_places + 2)
@@ -199,7 +215,7 @@ class Percent(BaseModel):
         ratio_decimal = whole_to_ratio(val)
         return cls(value=ratio_decimal, decimal_places=field_decimal_places)
 
-    def __mul__(self, other):
+    def __mul__(self, other: float | Decimal):
         """Multiply using the ratio (out of 1) instead of human-readable out of 100
 
         Examples:
@@ -207,7 +223,11 @@ class Percent(BaseModel):
             Decimal('3')
             >>> Percent(1) * 100
             Decimal('100')"""
-        return self.value.__mul__(other)
+        match self.value:
+            case float() | int():
+                return self.value * float(other)
+            case Decimal():
+                return self.value * Decimal(str(other))
 
     def __float__(self):
         return float(self.value)
@@ -222,10 +242,18 @@ class Percent(BaseModel):
         return self.value.as_tuple()
 
     def is_finite(self):
-        return self.value.is_finite()
+        match self.value:
+            case float():
+                raise NotImplementedError("is_finite not implemented for float values")
+            case Decimal():
+                return self.value.is_finite()
+            case int():
+                return True
 
+    @override
     def __repr__(self) -> str:
         return f"Percentage('{self.value}', '{self.per_hundred}%')"
 
+    @override
     def __str__(self):
         return f"{self.per_hundred}%"

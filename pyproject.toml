@@ -67,6 +67,7 @@ dev = [
   "deptry>=0.23.0,<0.24",
   "django-types>=0.22.0",
   "pre-commit>=3.7.1,<4",
+  "rich>=14.2.0",
   "types-toml>=0.10.8.20240310,<0.11",
 ]
 docs = [
@@ -108,11 +109,14 @@ DEP004 = ["mkdocs_gen_files"]
 [tool.hatch.version]
 source = "uv-dynamic-versioning"
 
+[tool.hatch.build.hooks.version]
+path = "django_rubble/_version.py"
+template = '''
+version = "{version}"
+'''
+
 [tool.hatch.build.targets.wheel]
 packages = ["django_rubble"]
-
-[tool.mypy]
-plugins = ["mypy_django_plugin.main"]
 
 [tool.pytest.ini_options]
 DJANGO_SETTINGS_MODULE = "test.settings"
