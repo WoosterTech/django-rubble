@@ -1,3 +1,9 @@
+## 0.8.1 (2026-05-06)
+
+### Fix
+
+- **smoke_test**: fix error with smoke test code
+
 ## 0.8.0 (2026-05-06)
 
 ### Feat
