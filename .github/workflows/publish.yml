@@ -1,14 +1,14 @@
 name: "Publish Package"
 
 on:
-  pull_request:
-    types: [ closed ]
+  push:
     branches: [ main ]
+    tags:
+      - 0.*
 
 jobs:
   run:
     runs-on: ubuntu-latest
-    if: github.event.pull_request.merged == true
     environment:
       name: pypi
     permissions:
