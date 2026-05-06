@@ -24,8 +24,3 @@ if __name__ == "__main__":
         print(msg)
     except Exception as e:
         raise RuntimeError("Smoke test failed") from e
-
-    if test_basic_imports():
-        print(msg)
-    else:
-        raise RuntimeError("Smoke test failed")
