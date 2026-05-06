@@ -8,7 +8,7 @@ from django_rubble.utils.numeric_utils import is_number
 
 def test_basic_imports():
     """Test that basic imports and functions work."""
-    return is_number(10)
+    _ = is_number(10)
 
 
 if __name__ == "__main__":
@@ -18,6 +18,12 @@ if __name__ == "__main__":
         msg = "[bold green]🎉 Smoke test succeeded 🎉[/bold green]"
     except ImportError:
         msg = "Smoke test succeeded"
+
+    try:
+        test_basic_imports()
+        print(msg)
+    except Exception as e:
+        raise RuntimeError("Smoke test failed") from e
 
     if test_basic_imports():
         print(msg)

@@ -1,7 +1,7 @@
 {
-    "include": ["django_rubble", "tests", "devtools"],
-    "reportIgnoreCommentWithoutRule": false,
-    "reportUnnecessaryTypeIgnoreComment": false,
-    "reportMissingTypeStubs": false,
-    "reportUnusedCallResult": false,
+    "include": ["django_rubble", "tests"],
+    "verboseOutput": true,
+    "venvPath": ".",
+    "venv": ".venv",
+    "pythonVersion": "3.12"
 }

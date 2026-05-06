@@ -1,7 +1,9 @@
 from decimal import Decimal, DecimalTuple
-from typing import TypeVar, overload, override
+from typing import TypeVar, overload
 
 from pydantic import BaseModel
+
+from django_rubble.models import override
 
 
 def is_number(s: object) -> bool:

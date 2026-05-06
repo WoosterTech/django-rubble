@@ -1,9 +1,10 @@
 import ast
 from pathlib import Path
-from typing import override
 
 from loguru import logger
 from rich import print as rich_print
+
+from django_rubble.models import override
 
 
 class SecretsFinder(ast.NodeVisitor):

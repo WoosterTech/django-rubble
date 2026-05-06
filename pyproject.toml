@@ -18,8 +18,10 @@ keywords = [
 #   "Framework :: Django :: 4.2",
 #   "Framework :: Django :: 5.0",
 #   "Framework :: Django :: 5.1",
+#   "Framework :: Django :: 5.2",
 # ]
 dependencies = [
+  "attrmagic>=0.2.0",
   "case-converter (>=1.2.0,<2.0.0)",
   "croniter (>=3.0)",
   "django-model-utils (>=4.5)",
@@ -31,7 +33,6 @@ dependencies = [
   "pydantic (>=2.7)",
   "toml (>=0.10.2,<0.11.0)",
   "typing-extensions (>=4.5) ; python_version < '3.12'",
-  "attrmagic>=0.2.0",
 ]
 dynamic = ["classifiers", "version"]
 
@@ -68,6 +69,8 @@ dev = [
   "django-types>=0.22.0",
   "pre-commit>=3.7.1,<4",
   "rich>=14.2.0",
+  "tox>=4.32.0",
+  "tox-uv>=1.29.0",
   "types-toml>=0.10.8.20240310,<0.11",
 ]
 docs = [
@@ -82,7 +85,7 @@ docs = [
 ]
 test = [
   "factory-boy>=3.3.1,<4",
-  "pytest>=8.2.1,<9",
+  "pytest>=8.4.2",
   "pytest-cov>=5.0.0,<6",
   "pytest-django>=4.8.0,<5",
   "pytest-sugar>=1.0.0,<2",
@@ -118,7 +121,7 @@ version = "{version}"
 [tool.hatch.build.targets.wheel]
 packages = ["django_rubble"]
 
-[tool.pytest.ini_options]
+[tool.pytest]
 DJANGO_SETTINGS_MODULE = "test.settings"
 
 [tool.uv]

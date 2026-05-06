@@ -1,19 +1,22 @@
+# pyright: reportAny=false, reportMissingParameterType=false
 from model_utils.models import TimeStampedModel  # type: ignore[import-untyped]
 
 from django_rubble.fields.auto_fields import AutoCreatedByField, AutoModifiedByField
+from django_rubble.models import override
 
 
 class StampedModel(TimeStampedModel):
     """A model that has created_by and modified_by fields that are automatically
     set to the user that created or modified the instance."""
 
-    created_by = AutoCreatedByField()
-    modified_by = AutoModifiedByField()
+    created_by: AutoCreatedByField = AutoCreatedByField()
+    modified_by: AutoModifiedByField = AutoModifiedByField()
 
-    class Meta:
-        abstract = True
+    class Meta:  # pyright: ignore[reportIncompatibleVariableOverride]
+        abstract: bool = True
 
-    def save(self, *args, **kwargs):
+    @override
+    def save(self, *args, **kwargs) -> None:
         update_fields = kwargs.get("update_fields", None)
         if update_fields is not None:
             if "modified_by" not in update_fields:

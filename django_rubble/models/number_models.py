@@ -1,3 +1,4 @@
+# pyright: reportAny=false, reportMissingParameterType=false
 from itertools import chain
 
 from django.contrib import admin
