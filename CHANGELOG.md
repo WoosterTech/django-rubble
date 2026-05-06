@@ -1,3 +1,9 @@
+## 0.7.2 (2026-05-06)
+
+### Fix
+
+- **override**: make sure override uses appropriate module as required
+
 ## 0.7.1 (2025-11-18)
 
 ## 0.7.0 (2025-11-18)
