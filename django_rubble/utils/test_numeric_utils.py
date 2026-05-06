@@ -1,5 +1,5 @@
 from decimal import Decimal
-from typing import TypeVar
+from typing import TypeAlias, TypeVar
 
 import pytest
 
@@ -7,6 +7,7 @@ from django_rubble.utils.numeric_utils import (
     any_to_float,
     is_number,
     ratio_to_whole,
+    set_zero,
     trim_trailing_zeros,
     whole_to_ratio,
 )
@@ -84,3 +85,19 @@ def test_ratio_to_whole(input_value: float | Decimal, expected: float | Decimal)
 )
 def test_whole_to_ratio(input_value: _T, expected: _T):
     assert whole_to_ratio(input_value) == expected
+
+
+# TODO: update syntax when dropping Python 3.11 support
+Number: TypeAlias = int | float | Decimal
+
+
+@pytest.mark.parametrize(
+    ("value", "expected"),
+    [
+        (0, Decimal("0")),
+        ("0.00", Decimal("0")),
+        (0.01, Decimal("0.01")),
+    ],
+)
+def test_set_zero(value: Number | str, expected: Decimal):
+    assert set_zero(value) == expected

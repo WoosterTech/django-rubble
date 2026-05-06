@@ -1,5 +1,5 @@
 from decimal import Decimal, DecimalTuple
-from typing import TypeVar, overload
+from typing import TypeAlias, TypeVar, overload
 
 from pydantic import BaseModel
 
@@ -58,6 +58,9 @@ def any_to_float(s: object, default: float = 0) -> float:
 
 
 T = TypeVar("T", int, float, Decimal)
+
+# TODO: update syntax when dropping Python 3.11 support
+Number: TypeAlias = int | float | Decimal
 
 
 @overload
@@ -135,7 +138,7 @@ def trim_trailing_zeros(value: float | Decimal | str) -> Decimal:
     return Decimal(str(value)).normalize()
 
 
-def set_zero(value: T) -> Decimal:
+def set_zero(value: Number | str) -> Decimal:
     """Set a value to a true Decimal zero if it is zero.
 
     Examples:
