@@ -1,3 +1,9 @@
+## 0.8.0 (2026-05-06)
+
+### Feat
+
+- **djangov6**: expand allowed django versions to 6 and limit python version <3.14
+
 ## 0.7.2 (2026-05-06)
 
 ### Fix
