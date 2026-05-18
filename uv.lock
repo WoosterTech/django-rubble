@@ -535,7 +535,7 @@ dev = [
     { name = "types-toml", specifier = ">=0.10.8.20240310,<0.11" },
 ]
 docs = [
-    { name = "griffe-fieldz", specifier = ">=0.2.0,<0.3" },
+    { name = "griffe-fieldz", specifier = ">=0.5,<0.6" },
     { name = "mkdocs", specifier = ">=1.6.1,<2" },
     { name = "mkdocs-gen-files", specifier = ">=0.5.0,<0.6" },
     { name = "mkdocs-include-markdown-plugin", specifier = ">=6.2.2,<7" },
@@ -661,15 +661,24 @@ wheels = [
 
 [[package]]
 name = "griffe-fieldz"
-version = "0.2.1"
+version = "0.5.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "fieldz" },
-    { name = "griffe" },
+    { name = "griffelib" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/95/95/5c47b6c54d106c76aad9b51177401ad4215a0de910c6853b689a2c6d07da/griffe_fieldz-0.2.1.tar.gz", hash = "sha256:7371693cdd045ac95aaebd16a81586d8dfa72c30e2d4519e0dde0d80f8ef0dc7", size = 8148, upload-time = "2025-01-12T20:55:09.063Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/1c/7f/b57a27807536590f0cabdd2e6c0faac78c7d6a740e096684c51c503b7003/griffe_fieldz-0.5.0.tar.gz", hash = "sha256:dcf237a0def9f5c15e15aa5cf07b3d0a4edf4f7d6a2d713a45afe29c8af9bc8e", size = 14250, upload-time = "2026-02-24T16:22:23.374Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/6f/fc/c059d128d77a369f54a3753162a38cd7668e5b4d14464672001a50cf2e9d/griffe_fieldz-0.2.1-py3-none-any.whl", hash = "sha256:04ae78b487c832a38b0495f971784d513da413b867c51e429f39d74f76d4f941", size = 5691, upload-time = "2025-01-12T20:55:07.634Z" },
+    { url = "https://files.pythonhosted.org/packages/ce/66/9daa3118d9bf4443778d6ee31b024c79766eeb116b275eca71597adae43a/griffe_fieldz-0.5.0-py3-none-any.whl", hash = "sha256:d363e56a7468019a7184ea3995277a1f20507bb9a345408c1f7014ae06878ebf", size = 9629, upload-time = "2026-02-24T16:22:22.094Z" },
+]
+
+[[package]]
+name = "griffelib"
+version = "2.0.2"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/9d/82/74f4a3310cdabfbb10da554c3a672847f1ed33c6f61dd472681ce7f1fe67/griffelib-2.0.2.tar.gz", hash = "sha256:3cf20b3bc470e83763ffbf236e0076b1211bac1bc67de13daf494640f2de707e", size = 166461, upload-time = "2026-03-27T11:34:51.091Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/11/8c/c9138d881c79aa0ea9ed83cbd58d5ca75624378b38cee225dcf5c42cc91f/griffelib-2.0.2-py3-none-any.whl", hash = "sha256:925c857658fb1ba40c0772c37acbc2ab650bd794d9c1b9726922e36ea4117ea1", size = 142357, upload-time = "2026-03-27T11:34:46.275Z" },
 ]
 
 [[package]]
