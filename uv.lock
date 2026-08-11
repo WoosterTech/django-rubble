@@ -41,9 +41,9 @@ resolution-markers = [
     "python_full_version < '3.12'",
 ]
 dependencies = [
-    { name = "pydantic", marker = "python_full_version < '3.12'" },
-    { name = "pydantic-core", marker = "python_full_version < '3.12'" },
-    { name = "typing-extensions", marker = "python_full_version < '3.12'" },
+    { name = "pydantic" },
+    { name = "pydantic-core" },
+    { name = "typing-extensions" },
 ]
 sdist = { url = "https://files.pythonhosted.org/packages/44/59/e23c7a5fb31fd52ed1a8751e2a3dfd6e25840dee4978900ae8254a08e900/attrmagic-0.2.2.tar.gz", hash = "sha256:d961093e4bd6a32fb5c03b8d66361d2244854ee78c751ba0cbff7c0ca4471eb4", size = 55725, upload-time = "2026-01-27T23:31:17.828Z" }
 wheels = [
@@ -58,8 +58,8 @@ resolution-markers = [
     "python_full_version >= '3.12'",
 ]
 dependencies = [
-    { name = "pydantic", marker = "python_full_version >= '3.12'" },
-    { name = "pydantic-core", marker = "python_full_version >= '3.12'" },
+    { name = "pydantic" },
+    { name = "pydantic-core" },
 ]
 sdist = { url = "https://files.pythonhosted.org/packages/d5/b8/53ee1cc412e147b5ae11440d2463aeabe719f69af44c25fa09ad79bd5f4c/attrmagic-0.2.3.tar.gz", hash = "sha256:e7a96a16f072ffd9e1b88553e2c1238583436256013a167b1154d0b5f6d5bcf8", size = 47284, upload-time = "2026-01-27T23:31:20.184Z" }
 wheels = [
@@ -371,9 +371,9 @@ resolution-markers = [
     "python_full_version < '3.12'",
 ]
 dependencies = [
-    { name = "asgiref", marker = "python_full_version < '3.12'" },
-    { name = "sqlparse", marker = "python_full_version < '3.12'" },
-    { name = "tzdata", marker = "python_full_version < '3.12' and sys_platform == 'win32'" },
+    { name = "asgiref" },
+    { name = "sqlparse" },
+    { name = "tzdata", marker = "sys_platform == 'win32'" },
 ]
 sdist = { url = "https://files.pythonhosted.org/packages/65/95/95f7faa0950867afaa0bef2460c6263afd6a2c78cc9434046ed28160b015/django-5.2.14.tar.gz", hash = "sha256:58a63ba841662e5c686b57ba1fec52ddd68c0b93bd96ac3029d55728f00bf8a2", size = 10895118, upload-time = "2026-05-05T13:57:31.104Z" }
 wheels = [
@@ -388,9 +388,9 @@ resolution-markers = [
     "python_full_version >= '3.12'",
 ]
 dependencies = [
-    { name = "asgiref", marker = "python_full_version >= '3.12'" },
-    { name = "sqlparse", marker = "python_full_version >= '3.12'" },
-    { name = "tzdata", marker = "python_full_version >= '3.12' and sys_platform == 'win32'" },
+    { name = "asgiref" },
+    { name = "sqlparse" },
+    { name = "tzdata", marker = "sys_platform == 'win32'" },
 ]
 sdist = { url = "https://files.pythonhosted.org/packages/5e/f1/bf85f0d29ef76abf901f193fe8fef4769d3da7794197832bc30151c071d8/django-6.0.5.tar.gz", hash = "sha256:bc6d6872e98a2864c836e42edd644b362db311147dd5aa8d5b82ba7a032f5269", size = 10924131, upload-time = "2026-05-05T13:54:39.329Z" }
 wheels = [
@@ -528,7 +528,7 @@ dev = [
     { name = "commitizen", specifier = ">=3.27.0,<4" },
     { name = "deptry", specifier = ">=0.23.0,<0.24" },
     { name = "django-types", specifier = ">=0.22.0" },
-    { name = "pre-commit", specifier = ">=3.7.1,<4" },
+    { name = "pre-commit", specifier = ">=4.6.2,<5" },
     { name = "rich", specifier = ">=14.2.0" },
     { name = "tox", specifier = ">=4.32.0" },
     { name = "tox-uv", specifier = ">=1.29.0" },
@@ -1155,7 +1155,7 @@ wheels = [
 
 [[package]]
 name = "pre-commit"
-version = "3.8.0"
+version = "4.6.2"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "cfgv" },
@@ -1164,9 +1164,9 @@ dependencies = [
     { name = "pyyaml" },
     { name = "virtualenv" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/64/10/97ee2fa54dff1e9da9badbc5e35d0bbaef0776271ea5907eccf64140f72f/pre_commit-3.8.0.tar.gz", hash = "sha256:8bb6494d4a20423842e198980c9ecf9f96607a07ea29549e180eef9ae80fe7af", size = 177815, upload-time = "2024-07-28T19:59:01.538Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/74/89/1f3e8e1fc3e97de0fa963495832f581f025f29471602a309e48808244292/pre_commit-4.6.2.tar.gz", hash = "sha256:8f5d7bfb021ecdbcd9d49d89847082dd24172ccde534390081a679ad046e2441", size = 198670, upload-time = "2026-08-10T22:07:18.421Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/07/92/caae8c86e94681b42c246f0bca35c059a2f0529e5b92619f6aba4cf7e7b6/pre_commit-3.8.0-py2.py3-none-any.whl", hash = "sha256:9a90a53bf82fdd8778d58085faf8d83df56e40dfe18f45b19446e26bf1b3a63f", size = 204643, upload-time = "2024-07-28T19:58:59.335Z" },
+    { url = "https://files.pythonhosted.org/packages/45/e2/bbb7129c9e7999a6b8ee9cca3b66486c25c423ab5a75f34071798b74ce94/pre_commit-4.6.2-py2.py3-none-any.whl", hash = "sha256:e2dde9a75d3bce11bd3831c26d134df00a2803c1d818be6a0383c3dcda25dc4e", size = 226202, upload-time = "2026-08-10T22:07:16.942Z" },
 ]
 
 [[package]]
