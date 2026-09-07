@@ -41,9 +41,9 @@ resolution-markers = [
     "python_full_version < '3.12'",
 ]
 dependencies = [
-    { name = "pydantic", marker = "python_full_version < '3.12'" },
-    { name = "pydantic-core", marker = "python_full_version < '3.12'" },
-    { name = "typing-extensions", marker = "python_full_version < '3.12'" },
+    { name = "pydantic" },
+    { name = "pydantic-core" },
+    { name = "typing-extensions" },
 ]
 sdist = { url = "https://files.pythonhosted.org/packages/44/59/e23c7a5fb31fd52ed1a8751e2a3dfd6e25840dee4978900ae8254a08e900/attrmagic-0.2.2.tar.gz", hash = "sha256:d961093e4bd6a32fb5c03b8d66361d2244854ee78c751ba0cbff7c0ca4471eb4", size = 55725, upload-time = "2026-01-27T23:31:17.828Z" }
 wheels = [
@@ -58,8 +58,8 @@ resolution-markers = [
     "python_full_version >= '3.12'",
 ]
 dependencies = [
-    { name = "pydantic", marker = "python_full_version >= '3.12'" },
-    { name = "pydantic-core", marker = "python_full_version >= '3.12'" },
+    { name = "pydantic" },
+    { name = "pydantic-core" },
 ]
 sdist = { url = "https://files.pythonhosted.org/packages/d5/b8/53ee1cc412e147b5ae11440d2463aeabe719f69af44c25fa09ad79bd5f4c/attrmagic-0.2.3.tar.gz", hash = "sha256:e7a96a16f072ffd9e1b88553e2c1238583436256013a167b1154d0b5f6d5bcf8", size = 47284, upload-time = "2026-01-27T23:31:20.184Z" }
 wheels = [
@@ -371,9 +371,9 @@ resolution-markers = [
     "python_full_version < '3.12'",
 ]
 dependencies = [
-    { name = "asgiref", marker = "python_full_version < '3.12'" },
-    { name = "sqlparse", marker = "python_full_version < '3.12'" },
-    { name = "tzdata", marker = "python_full_version < '3.12' and sys_platform == 'win32'" },
+    { name = "asgiref" },
+    { name = "sqlparse" },
+    { name = "tzdata", marker = "sys_platform == 'win32'" },
 ]
 sdist = { url = "https://files.pythonhosted.org/packages/65/95/95f7faa0950867afaa0bef2460c6263afd6a2c78cc9434046ed28160b015/django-5.2.14.tar.gz", hash = "sha256:58a63ba841662e5c686b57ba1fec52ddd68c0b93bd96ac3029d55728f00bf8a2", size = 10895118, upload-time = "2026-05-05T13:57:31.104Z" }
 wheels = [
@@ -388,9 +388,9 @@ resolution-markers = [
     "python_full_version >= '3.12'",
 ]
 dependencies = [
-    { name = "asgiref", marker = "python_full_version >= '3.12'" },
-    { name = "sqlparse", marker = "python_full_version >= '3.12'" },
-    { name = "tzdata", marker = "python_full_version >= '3.12' and sys_platform == 'win32'" },
+    { name = "asgiref" },
+    { name = "sqlparse" },
+    { name = "tzdata", marker = "sys_platform == 'win32'" },
 ]
 sdist = { url = "https://files.pythonhosted.org/packages/5e/f1/bf85f0d29ef76abf901f193fe8fef4769d3da7794197832bc30151c071d8/django-6.0.5.tar.gz", hash = "sha256:bc6d6872e98a2864c836e42edd644b362db311147dd5aa8d5b82ba7a032f5269", size = 10924131, upload-time = "2026-05-05T13:54:39.329Z" }
 wheels = [
@@ -535,7 +535,7 @@ dev = [
     { name = "types-toml", specifier = ">=0.10.8.20240310,<0.11" },
 ]
 docs = [
-    { name = "griffe-fieldz", specifier = ">=0.2.0,<0.3" },
+    { name = "griffe-fieldz", specifier = ">=0.5,<0.6" },
     { name = "mkdocs", specifier = ">=1.6.1,<2" },
     { name = "mkdocs-gen-files", specifier = ">=0.5.0,<0.6" },
     { name = "mkdocs-include-markdown-plugin", specifier = ">=6.2.2,<7" },
@@ -661,15 +661,24 @@ wheels = [
 
 [[package]]
 name = "griffe-fieldz"
-version = "0.2.1"
+version = "0.5.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "fieldz" },
-    { name = "griffe" },
+    { name = "griffelib" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/95/95/5c47b6c54d106c76aad9b51177401ad4215a0de910c6853b689a2c6d07da/griffe_fieldz-0.2.1.tar.gz", hash = "sha256:7371693cdd045ac95aaebd16a81586d8dfa72c30e2d4519e0dde0d80f8ef0dc7", size = 8148, upload-time = "2025-01-12T20:55:09.063Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/1c/7f/b57a27807536590f0cabdd2e6c0faac78c7d6a740e096684c51c503b7003/griffe_fieldz-0.5.0.tar.gz", hash = "sha256:dcf237a0def9f5c15e15aa5cf07b3d0a4edf4f7d6a2d713a45afe29c8af9bc8e", size = 14250, upload-time = "2026-02-24T16:22:23.374Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/6f/fc/c059d128d77a369f54a3753162a38cd7668e5b4d14464672001a50cf2e9d/griffe_fieldz-0.2.1-py3-none-any.whl", hash = "sha256:04ae78b487c832a38b0495f971784d513da413b867c51e429f39d74f76d4f941", size = 5691, upload-time = "2025-01-12T20:55:07.634Z" },
+    { url = "https://files.pythonhosted.org/packages/ce/66/9daa3118d9bf4443778d6ee31b024c79766eeb116b275eca71597adae43a/griffe_fieldz-0.5.0-py3-none-any.whl", hash = "sha256:d363e56a7468019a7184ea3995277a1f20507bb9a345408c1f7014ae06878ebf", size = 9629, upload-time = "2026-02-24T16:22:22.094Z" },
+]
+
+[[package]]
+name = "griffelib"
+version = "2.3.0"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/27/af/018c10bc9edd42b6ef6db2e96b09542050d5253f9b195e74bc910b2d13ab/griffelib-2.3.0.tar.gz", hash = "sha256:7b0952caf5bca6afa4bb5ee8c6a2d183fe3f21b62efc5f6c7243cb2b26d2d115", size = 234534, upload-time = "2026-09-04T15:08:17.472Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/41/63/e876e789525063c840ccfa8857febdabd6523bcef9ce7eb979b9305ea895/griffelib-2.3.0-py3-none-any.whl", hash = "sha256:1b8f9cd525681c26b1d6d574faa1371651e8459ca51d209684f50b8096ae06e0", size = 169423, upload-time = "2026-09-04T15:08:12.956Z" },
 ]
 
 [[package]]
